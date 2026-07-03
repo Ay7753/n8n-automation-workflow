@@ -1,0 +1,108 @@
+{
+  "name": "Topic 10 Gmail Integration Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4bb7fb4f-bdbf-4628-a9a6-5625f38c5b42",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fb5a1eb5-01b8-404a-a5f2-c15909e2d84d",
+              "name": " customerName",
+              "value": "Alice Smith ",
+              "type": "string"
+            },
+            {
+              "id": "fd907f77-e409-4e3a-b9b6-a4108a03477b",
+              "name": "customerEmail",
+              "value": "theayushkumar0207@gmail.com",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "1531efc0-8940-4082-91d6-ef21864e14c9",
+      "name": "Mock Customer Data"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.customerEmail }}",
+        "subject": "=Welcome to N8N Course,{{ $json.customerEmail }}!",
+        "emailType": "text",
+        "message": "=Hi {{$json.customerEmail }},",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "99522df8-d37d-4ddc-89d0-b9a82f56c80c",
+      "name": "Send a message",
+      "webhookId": "c5f6029f-5006-4af0-a73d-7f63d91d6ff8",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "jI2RfMPqrVp8bXSQ",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Mock Customer Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mock Customer Data": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "3a3327d0-75f8-4239-a3a7-b7801f9cc2ed",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2ffb66111b378206a5091421433e38579407fd38496c6d6b4eb3f34a980413a7"
+  },
+  "nodeGroups": [],
+  "id": "bUn6rmvHfHIT6qeb",
+  "tags": []
+}

@@ -1,0 +1,83 @@
+{
+  "name": "Topic 8 Webhook Trigger Workflow.",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "contact-form",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8aa9d88c-242f-42a5-ad57-e45c38263378",
+      "name": "Webhook",
+      "webhookId": "a78556cb-b76b-41ba-bb42-c1ebb3c01484"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3d752d97-25ef-4102-9876-a8c2599738e8",
+              "name": "customerName",
+              "value": "={{ $json.body.name }}",
+              "type": "string"
+            },
+            {
+              "id": "9f3ef385-8a4c-40b7-a9f3-407f5b01800c",
+              "name": "customerEmail",
+              "value": "={{ $json.body.email }}",
+              "type": "string"
+            },
+            {
+              "id": "13d267e7-e179-446f-aa31-8fa97e7fb445",
+              "name": "=customerMessage",
+              "value": "={{ $json.body.message }} ",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "4f7e737e-e03f-446b-8878-eff72b7931b1",
+      "name": "node to Process Webhook Data"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "node to Process Webhook Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "e4bfb37b-fba7-467e-b028-5a4d3bc59126",
+  "meta": {
+    "instanceId": "2ffb66111b378206a5091421433e38579407fd38496c6d6b4eb3f34a980413a7"
+  },
+  "nodeGroups": [],
+  "id": "ucPwFIc5ICrfylnZ",
+  "tags": []
+}

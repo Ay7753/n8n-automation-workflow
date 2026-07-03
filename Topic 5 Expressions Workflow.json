@@ -1,0 +1,124 @@
+{
+  "name": "Topic 5 Expressions Workflow.",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "d5d1ace6-c1b6-4933-98d9-6d3b8f25c2f4",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "144356cc-258d-4d84-9776-44f8687a4b2d",
+              "name": "firstName",
+              "value": "alex",
+              "type": "string"
+            },
+            {
+              "id": "25c02cdb-3289-47f2-adb1-38712009a06f",
+              "name": "lastName ",
+              "value": "smith",
+              "type": "string"
+            },
+            {
+              "id": "f172b8eb-1cb2-44ee-9363-4d7d59ee6a2a",
+              "name": " birthDate",
+              "value": " 1998-04-12T10:15:30.000Z ",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "a754a716-501e-4403-b80c-2458885257a6",
+      "name": "Set Student Info"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4c861fb6-4370-4f61-adca-011e04565467",
+              "name": "fullNameUpperCase",
+              "value": "={{ ($json.firstName + ' ' +$json[\"lastName \"] ).toUpperCase() }} ",
+              "type": "string"
+            },
+            {
+              "id": "f7561720-066b-4519-9efe-56186a302522",
+              "name": "formattedBirthDate",
+              "value": "={{ $json[\" birthDate\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "6ad2c58c-959b-46c9-b6e8-e1617d3ef510",
+              "name": " processedDate",
+              "value": "= {{ $now.toFormat('yyyy-MM-dd') }} ",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "d10f7917-6fe1-4e09-b455-fb2ba8a23211",
+      "name": "Format and Transform"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Set Student Info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Student Info": {
+      "main": [
+        [
+          {
+            "node": "Format and Transform",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "98703d3c-276a-48ce-84df-ad1489957297",
+  "meta": {
+    "instanceId": "2ffb66111b378206a5091421433e38579407fd38496c6d6b4eb3f34a980413a7"
+  },
+  "nodeGroups": [],
+  "id": "eDmRIVqm9661DL1f",
+  "tags": []
+}

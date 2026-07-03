@@ -1,0 +1,80 @@
+{
+  "name": "Topic 15 Split in Batches Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "5f789cd3-36a8-4a8e-91a1-092aced1fb62",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      url: \"https://jsonplaceholder.typicode.com/posts/1\"\n    }\n  },\n  {\n    json: {\n      url: \"https://jsonplaceholder.typicode.com/posts/1\"\n    }\n  },\n  {\n    json: {\n      url: \"https://invalid-url-domain-does-not-exist.xyz/\"\n    }\n  },\n  {\n    json: {\n      url: \"https://jsonplaceholder.typicode.com/posts/1\"\n    }\n  },\n  {\n    json: {\n      url: \"https://jsonplaceholder.typicode.com/posts/1\"\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        192,
+        0
+      ],
+      "id": "3bba616f-295f-413b-b1de-8f611fd1a25d",
+      "name": "Mock Items List"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        400,
+        0
+      ],
+      "id": "316170e9-c079-476e-8c5e-c02c0214eddc",
+      "name": "Split Out"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Mock Items List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mock Items List": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "04a1ed29-0754-47b4-b94e-2da477f1ce87",
+  "meta": {
+    "instanceId": "2ffb66111b378206a5091421433e38579407fd38496c6d6b4eb3f34a980413a7"
+  },
+  "nodeGroups": [],
+  "id": "9S8h5LZ1DTM8Eb9P",
+  "tags": []
+}
