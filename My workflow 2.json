@@ -1,0 +1,60 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "04cf0a15-89f5-4298-a824-c22e5d9e36e3",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://jsonplaceholder.typicode.com/invalid-route-9988",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "da5a0d03-2395-41be-bef3-bb82a1d00235",
+      "name": "Call Flaky API",
+      "retryOnFail": true,
+      "waitBetweenTries": 2000,
+      "onError": "continueErrorOutput"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Call Flaky API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "1aefee1f-0717-4272-91da-8c61aa59453d",
+  "meta": {
+    "instanceId": "9e9d53952f2b4667ae0042e862ee2bef1c0d895d32c50439fa759c25e9e7e8c0"
+  },
+  "nodeGroups": [],
+  "id": "tnLXCmg4nM7Xi16K",
+  "tags": []
+}

@@ -1,0 +1,131 @@
+{
+  "name": "N8N API Authentication Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "56797c66-6b56-4d4b-aab4-e6bb57c215d8",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://postman-echo.com/basic-auth",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "a65ee482-e415-499e-98b1-948243acbae2",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "nr7WuAozr9YbFND5",
+          "name": "Unnamed credential 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://postman-echo.com/headers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "b3d2ee21-c8e7-42e0-a6dd-039f88d72931",
+      "name": "HTTP Request1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "Jz1fbFvZNWwzLH0l",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://github.com/login/oauth/authorize",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        592,
+        0
+      ],
+      "id": "d99a7350-721f-44fb-9362-401a618d0cd1",
+      "name": "HTTP Request2",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "S7OgT8DYPNusfi85",
+          "name": "GitHub OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "35c7a2e3-2ee9-47fd-9e14-c083210e34c9",
+  "meta": {
+    "instanceId": "9e9d53952f2b4667ae0042e862ee2bef1c0d895d32c50439fa759c25e9e7e8c0"
+  },
+  "nodeGroups": [],
+  "id": "SUEFK0p3xVn1FYJT",
+  "tags": []
+}

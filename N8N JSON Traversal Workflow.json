@@ -1,0 +1,145 @@
+{
+  "name": "N8N JSON Traversal Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "fcf57481-08e2-44bb-b313-d71a342d09bc",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bf8bc1ee-0eed-41fc-bff5-3835b5c881f4",
+              "name": "customerEmail",
+              "value": "={{ $json.customer.contact.email }}",
+              "type": "string"
+            },
+            {
+              "id": "bd54cbca-954a-4b48-abcb-cbffe529483f",
+              "name": "fullName",
+              "value": "={{ $json.customer.firstName }} {{ $json.customer.lastName }}",
+              "type": "string"
+            },
+            {
+              "id": "b9c309dd-9498-4fdf-97a8-47134259479e",
+              "name": "firstItemName",
+              "value": "={{ $json.purchasedItems[0].name }}",
+              "type": "string"
+            },
+            {
+              "id": "ffa321c6-b103-4e91-a60d-2a19ac541625",
+              "name": "firstItemPrice",
+              "value": "={{ $json.purchasedItems[0].price }}",
+              "type": "string"
+            },
+            {
+              "id": "0538e9d4-d4c3-4d93-8cd3-283f89bf9c56",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "39a777ee-8917-4709-8306-3c2e5c6bcbc5",
+      "name": "Extract Customer Data"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://jsonplaceholder.typicode.com/posts",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"New Purchase for {{ $json.fullName }}\",\n  \"body\": \"Sent email invoice to {{ $json.customerEmail }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        624,
+        0
+      ],
+      "id": "43ef6a97-f9b1-4107-a157-5921adda2390",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"receiptId\": \"REC-9988\",\n  \"customer\": {\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"contact\": {\n      \"email\": \"johndoe@example.com\"\n    }\n  },\n  \"purchasedItems\": [\n    { \"name\": \"Wireless Mouse\", \"price\": 25.99 },\n    { \"name\": \"Mechanical Keyboard\", \"price\": 89.99 }\n  ],\n  \"discountCode\": null\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "a412dc05-bce6-4417-93ea-2b27d9efbd1b",
+      "name": "Mock Invoice Data"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Mock Invoice Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Customer Data": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mock Invoice Data": {
+      "main": [
+        [
+          {
+            "node": "Extract Customer Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "7fb0bfc4-fa6a-40c6-b21e-faf8ca885a2b",
+  "meta": {
+    "instanceId": "9e9d53952f2b4667ae0042e862ee2bef1c0d895d32c50439fa759c25e9e7e8c0"
+  },
+  "nodeGroups": [],
+  "id": "O6hNWnGQgFBEKsNi",
+  "tags": []
+}

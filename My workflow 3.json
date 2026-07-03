@@ -1,0 +1,114 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        208,
+        -272
+      ],
+      "id": "b98c58f8-a17c-41b3-acee-ca18b7a5bda3",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://jsonplaceholder.typicode.com/users/1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        432,
+        -368
+      ],
+      "id": "23fb45cc-065a-42f2-bda3-62bd73f4f1c8",
+      "name": "Fetch User 1"
+    },
+    {
+      "parameters": {
+        "url": "https://jsonplaceholder.typicode.com/users/2",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        432,
+        -176
+      ],
+      "id": "ebe09c25-ba87-42a0-add6-82a450ebe205",
+      "name": "Fetch User 2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        656,
+        -272
+      ],
+      "id": "8bdea583-027b-4015-8ba8-61eb87bd66d0",
+      "name": "Merge"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Fetch User 1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Fetch User 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch User 1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch User 2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "bbb64662-498b-47c2-9fd8-ab7e2fafc358",
+  "meta": {
+    "instanceId": "9e9d53952f2b4667ae0042e862ee2bef1c0d895d32c50439fa759c25e9e7e8c0"
+  },
+  "nodeGroups": [],
+  "id": "PptKGySLGVQWqZtZ",
+  "tags": []
+}

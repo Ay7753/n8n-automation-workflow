@@ -1,0 +1,91 @@
+{
+  "name": "N8N Lead Webhook Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "965ae5ff-4658-4fde-9511-a25e34f8fba6",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "3876fc80-7288-4427-a028-dd8db7282eb6",
+      "name": "Webhook",
+      "webhookId": "965ae5ff-4658-4fde-9511-a25e34f8fba6",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "mJg8c5tKagtEl0Jy",
+          "name": "Header Auth account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "54af1467-7c43-4c02-be12-6f05d91a9403",
+              "name": "Lead ID",
+              "value": "={{$json.body.leadId}}",
+              "type": "string"
+            },
+            {
+              "id": "9d5a3da9-e242-4ce4-b15f-c070212f0daa",
+              "name": "Name",
+              "value": "={{$json.body.name}}",
+              "type": "string"
+            },
+            {
+              "id": "ce65f516-cc8c-4fd4-a8f5-f95ca03784fa",
+              "name": "Email",
+              "value": "={{$json.body.email}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "ff71dee5-87a4-4d91-befe-e759fc52ff9f",
+      "name": "N8N Lead Webhook Workflow"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "N8N Lead Webhook Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "5cc608bf-f1c2-48ef-b950-d337e4e96bc8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9e9d53952f2b4667ae0042e862ee2bef1c0d895d32c50439fa759c25e9e7e8c0"
+  },
+  "nodeGroups": [],
+  "id": "tOuqK6HmibxS6kvO",
+  "tags": []
+}
