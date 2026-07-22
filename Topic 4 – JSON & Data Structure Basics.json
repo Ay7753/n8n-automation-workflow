@@ -1,0 +1,102 @@
+{
+  "name": "Topic 4 – JSON & Data Structure Basics.",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        0
+      ],
+      "id": "55c35785-0a03-4110-9dc4-0eda8ed42977",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      customer: {\n        name: \"Jane Doe\",\n        email: \"jane@example.com\",\n        address: {\n          city: \"New York\",\n          zipcode: \"10001\"\n        }\n      },\n      orders: [\n        { id: 101, total: 45.99 },\n        { id: 102, total: 12.50 }\n      ],\n      status: \"active\"\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        176,
+        0
+      ],
+      "id": "8dbd5a6d-e258-41ee-89bf-ba24a1517579",
+      "name": "Mock Nested JSON Data"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "20cd09bf-6421-4339-a829-c19fe054b821",
+              "name": "customerName",
+              "value": "={{ $json.customer.name }}",
+              "type": "string"
+            },
+            {
+              "id": "394bdc7c-19b6-4446-bd44-0a5e05c8ea33",
+              "name": "cityOfCustomer",
+              "value": "={{ $json.customer.address.city }}",
+              "type": "string"
+            },
+            {
+              "id": "38ac56f4-52fa-4aef-9a11-61cd7ec67df3",
+              "name": "firstOrderTotal",
+              "value": "={{ $json.orders[0].total }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        352,
+        0
+      ],
+      "id": "6a0efc12-6105-4225-a4a2-595c7a706f09",
+      "name": "Extract Values"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Mock Nested JSON Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mock Nested JSON Data": {
+      "main": [
+        [
+          {
+            "node": "Extract Values",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "c4234e19-9115-4bc7-bfa7-321cbc1b84df",
+  "meta": {
+    "instanceId": "2ffb66111b378206a5091421433e38579407fd38496c6d6b4eb3f34a980413a7"
+  },
+  "nodeGroups": [],
+  "id": "P30U1njFeE5HhSpa",
+  "tags": []
+}

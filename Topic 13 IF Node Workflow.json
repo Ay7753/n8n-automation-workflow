@@ -1,0 +1,165 @@
+{
+  "name": "Topic 13 IF Node Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "630ed14b-1b33-4035-a46c-d76a2d513bee",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "0c99dc8a-55b5-44e7-98b9-3532a9342e54",
+              "leftValue": "={{ $json.orderValue }}",
+              "rightValue": "=100",
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        592,
+        -16
+      ],
+      "id": "dce34de4-dd59-4b85-a163-b971fc9c2b0c",
+      "name": "Check Order VIP Status"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "615bf6ea-4ab5-4af3-89d3-0ecb3f99a375",
+              "name": "status",
+              "value": "VIP",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        -112
+      ],
+      "id": "028a66b3-3a6c-45fd-816f-7e68ae5a07a4",
+      "name": "Set VIP"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "85e59f76-af4b-4072-b43f-a5b9c67701a7",
+              "name": "status",
+              "value": "Regular",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        80
+      ],
+      "id": "b8ceb973-613d-4e7d-9fc9-c3d584c0dd44",
+      "name": "Set Regular"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      customerName: \"Alice\",\n      orderValue: 150\n    }\n  },\n  {\n    json: {\n      customerName: \"Bob\",\n      orderValue: 75\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        288,
+        0
+      ],
+      "id": "79e571ad-50c9-48fe-87fb-33b3354b142c",
+      "name": "Mock Orders"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Mock Orders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Order VIP Status": {
+      "main": [
+        [
+          {
+            "node": "Set VIP",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set Regular",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mock Orders": {
+      "main": [
+        [
+          {
+            "node": "Check Order VIP Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "9b4d1989-57cf-42cf-b18a-0ab0b57b1b39",
+  "meta": {
+    "instanceId": "2ffb66111b378206a5091421433e38579407fd38496c6d6b4eb3f34a980413a7"
+  },
+  "nodeGroups": [],
+  "id": "stKiSJBI0CZujK7o",
+  "tags": []
+}

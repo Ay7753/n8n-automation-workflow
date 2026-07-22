@@ -1,0 +1,66 @@
+{
+  "name": "N8N Beginner First Manual Trigger with Greeting Message",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "d18a3ccc-047a-4441-be29-3b740a219250",
+      "name": "When clicking Test workflow",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        240,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "greeting",
+              "value": "Hello, n8n!",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7114b0b9-a344-4b21-a246-4b07fbd89c1e",
+      "name": "Create Greeting Message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        464,
+        304
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking Test workflow": {
+      "main": [
+        [
+          {
+            "node": "Create Greeting Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "fed53f0f-fb53-4bb8-98a6-a5c4f65fc87d",
+  "meta": {
+    "instanceId": "2ffb66111b378206a5091421433e38579407fd38496c6d6b4eb3f34a980413a7"
+  },
+  "nodeGroups": [],
+  "id": "vZdTpasjI3V7j2D0",
+  "tags": []
+}
